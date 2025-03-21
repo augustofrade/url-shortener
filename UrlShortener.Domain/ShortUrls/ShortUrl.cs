@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.Domain;
+﻿namespace UrlShortener.Domain.ShortUrls;
 
 public sealed class ShortUrl : Entity
 {
@@ -6,18 +6,21 @@ public sealed class ShortUrl : Entity
     public string OriginalUrl { get; private set; }
     public string Url { get; private set; }
 
+    public ShortUrlConfiguration Configuration { get; init; }
+
     public ShortUrl() { }
 
-    private ShortUrl(string originalUrl)
+    private ShortUrl(string originalUrl, ShortUrlConfiguration configuration)
     {
         OriginalUrl = originalUrl;
         Url = GenerateShortenedUrl(originalUrl);
         Id = Guid.NewGuid();
+        Configuration = configuration;
     }
 
-    public static ShortUrl Create(string OriginalUrl)
+    public static ShortUrl Create(string OriginalUrl, ShortUrlConfiguration configuration)
     {
-        var shortUrl = new ShortUrl(OriginalUrl);
+        var shortUrl = new ShortUrl(OriginalUrl, configuration);
         return shortUrl;
     }
 

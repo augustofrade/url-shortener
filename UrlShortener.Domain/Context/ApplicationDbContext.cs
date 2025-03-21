@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UrlShortener.Domain.ShortUrls;
 
 namespace UrlShortener.Domain.Context;
 
@@ -8,6 +9,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        modelBuilder.Entity<ShortUrl>().OwnsOne(e => e.Configuration);
     }
 }
