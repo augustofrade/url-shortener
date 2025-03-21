@@ -21,8 +21,16 @@ internal class ShortUrlService(IShortUrlRepository shortUrlRepository) : IShortU
         return success ? shortUrl : null;
     }
 
-    public Task<ShortUrl?> GetByUrlAsync(string baseUrl)
+    public Task<ShortUrl?> GetByShortUrlAsync(string shortUrl)
     {
-        return shortUrlRepository.GetByUrlAsync(baseUrl);
+        return shortUrlRepository.GetByShortUrlAsync(shortUrl);
+    }
+
+    public async Task<string?> GetOriginalUrlAsync(string shortUrl)
+    {
+        var shortUrlEntity = await GetByShortUrlAsync(shortUrl);
+        if (shortUrlEntity == null)
+            return null;
+        return shortUrlEntity.Configuration.IsAccessible ? shortUrlEntity.OriginalUrl : null;
     }
 }
