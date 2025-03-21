@@ -2,4 +2,4 @@
 
 namespace UrlShortener.API.Dto.Shortener;
 
-public record ShortUrlResponse(ShortUrl? ShortUrl);
+public record CreateShortUrlResponse(ShortUrl? ShortUrl);

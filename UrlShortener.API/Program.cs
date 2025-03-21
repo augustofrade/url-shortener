@@ -48,8 +48,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-
-ShortenerRouter.RegisterRoutes(app);
+app.MapGroup("short-url").MapShortUrlRoutes();
 
 app.UseCors("AllowAngularClient");
 

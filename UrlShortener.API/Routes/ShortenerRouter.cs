@@ -12,7 +12,7 @@ public static class ShortenerRouter
         app.MapPost("/shortener", async ([FromBody] CreateShortUrlDto createDto, IShortUrlService shortUrlService) =>
         {
             var shortUrl = await shortUrlService.CreateAsync(createDto);
-            return new Response<ShortUrlResponse>(new(shortUrl));
+            return new Response<CreateShortUrlResponse>(new(shortUrl));
         })
             .WithTags("Shortener")
             .WithDescription("Shortens the provided URL");
