@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using UrlShortener.API.Routes;
+using UrlShortener.Domain.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,12 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
         }
     );
+});
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("UrlShortener.API"));
 });
 
 // Add services to the container.
