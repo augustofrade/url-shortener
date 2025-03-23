@@ -1,4 +1,7 @@
-﻿namespace UrlShortener.Domain.ShortUrls;
+﻿using shortid;
+using shortid.Configuration;
+
+namespace UrlShortener.Domain.ShortUrls;
 
 public sealed class ShortUrl : Entity
 {
@@ -13,7 +16,7 @@ public sealed class ShortUrl : Entity
     private ShortUrl(string originalUrl, ShortUrlConfiguration configuration)
     {
         OriginalUrl = originalUrl;
-        UrlCode = GenerateShortenedUrl(originalUrl);
+        UrlCode = GenerateUrlCode();
         Id = Guid.NewGuid();
         Configuration = configuration;
     }
@@ -24,9 +27,9 @@ public sealed class ShortUrl : Entity
         return shortUrl;
     }
 
-    private string GenerateShortenedUrl(string baseUrl)
+    private string GenerateUrlCode()
     {
-        // TODO: define short url creation
-        return baseUrl;
+        var idOptions = new GenerationOptions(length: 8, useSpecialCharacters: false);
+        return ShortId.Generate(idOptions);
     }
 }

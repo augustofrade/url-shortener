@@ -19,7 +19,7 @@ public sealed class ShortUrlConfiguration
 
     public void SetExpirationDate(DateTime? expirationDate)
     {
-        if(expirationDate.HasValue && DateTime.UtcNow.CompareTo(expirationDate.Value) <= 0)
+        if(expirationDate.HasValue && DateTime.UtcNow.CompareTo(expirationDate.Value) >= 0)
         {
             throw new InvalidOperationException("Expiration date and time cannot be before current date and time");
         }
