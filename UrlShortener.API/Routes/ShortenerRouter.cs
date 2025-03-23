@@ -7,9 +7,9 @@ namespace UrlShortener.API.Routes;
 
 public static class ShortenerRouter
 {
-    public static void RegisterRoutes(WebApplication app)
+    public static void MapShortenerRoutes(this RouteGroupBuilder group)
     {
-        app.MapPost("/shortener", async ([FromBody] CreateShortUrlDto createDto, IShortUrlService shortUrlService) =>
+        group.MapPost("/", async ([FromBody] CreateShortUrlDto createDto, IShortUrlService shortUrlService) =>
         {
             var shortUrl = await shortUrlService.CreateAsync(createDto);
             return new Response<CreateShortUrlResponse>(new(shortUrl));
