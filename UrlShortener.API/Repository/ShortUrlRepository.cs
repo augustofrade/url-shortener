@@ -20,9 +20,9 @@ internal sealed class ShortUrlRepository(ApplicationDbContext dbContext) : IShor
         }
     }
 
-    public Task<ShortUrl?> GetByShortUrlAsync(string shortUrl)
+    public Task<ShortUrl?> GetByUrlCodeAsync(string urlCode)
     {
-        return dbContext.ShortUrl.Where(u => u.Url == shortUrl).FirstOrDefaultAsync();
+        return dbContext.ShortUrl.Where(u => u.UrlCode == urlCode).FirstOrDefaultAsync();
     }
 
     public Task SaveAsync()

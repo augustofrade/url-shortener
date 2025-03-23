@@ -9,10 +9,10 @@ public static class ShortUrlRouter
 {
     public static void MapShortUrlRoutes(this RouteGroupBuilder group)
     {
-        group.MapGet("url/{shortUrl}", async ([FromRoute] string shortUrl, IShortUrlService shortUrlService) =>
+        group.MapGet("url/{urlCode}", async ([FromRoute] string urlCode, IShortUrlService shortUrlService) =>
         {
-            string? originalUrl = await shortUrlService.GetOriginalUrlAsync(shortUrl);
-            return new Response<GetShortUrlResponse>(new(originalUrl));
+            string? originalUrl = await shortUrlService.GetOriginalUrlAsync(urlCode);
+            return new Response<GetShortUrlResponse>(new GetShortUrlResponse(originalUrl));
         })
             .WithTags("Short Url")
             .WithDescription("Get base url from shortened url");

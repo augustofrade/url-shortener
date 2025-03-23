@@ -21,14 +21,14 @@ internal class ShortUrlService(IShortUrlRepository shortUrlRepository) : IShortU
         return success ? shortUrl : null;
     }
 
-    public Task<ShortUrl?> GetByShortUrlAsync(string shortUrl)
+    public Task<ShortUrl?> GetByUrlCodeAsync(string urlCode)
     {
-        return shortUrlRepository.GetByShortUrlAsync(shortUrl);
+        return shortUrlRepository.GetByUrlCodeAsync(urlCode);
     }
 
-    public async Task<string?> GetOriginalUrlAsync(string shortUrl)
+    public async Task<string?> GetOriginalUrlAsync(string urlCode)
     {
-        var shortUrlEntity = await GetByShortUrlAsync(shortUrl);
+        var shortUrlEntity = await GetByUrlCodeAsync(urlCode);
         if (shortUrlEntity == null)
             return null;
         return shortUrlEntity.Configuration.IsAccessible ? shortUrlEntity.OriginalUrl : null;

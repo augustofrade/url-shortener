@@ -5,7 +5,7 @@ namespace UrlShortener.API.Services;
 
 internal interface IShortUrlService
 {
-    Task<ShortUrl?> GetByShortUrlAsync(string shortUrl);
+    Task<ShortUrl?> GetByUrlCodeAsync(string urlCode);
     Task<ShortUrl?> CreateAsync(CreateShortUrlDto createDto);
-    Task<string?> GetOriginalUrlAsync(string shortUrl);
+    Task<string?> GetOriginalUrlAsync(string urlCode);
 }
